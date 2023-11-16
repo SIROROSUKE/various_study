@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Timer</title>
   <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
     #timerDisplay {
       font-size: 18px;
       margin-top: 10px;
@@ -12,8 +21,6 @@
     }
 
     #myImage {
-      display: block;
-      margin: 0 auto;
       cursor: pointer;
     }
   </style>
@@ -28,7 +35,7 @@
       var timerDisplay = document.getElementById("timerDisplay");
       var myImage = document.getElementById("myImage");
       var startTime;
-      var timerId; // 追加: タイマーIDを保存する変数
+      var timerId;
 
       function waitImageClick() {
         return new Promise(function(resolve) {
@@ -81,7 +88,6 @@
           startMeasurement();
           updateElapsedTime();
         } else {
-          // タイマーを停止する
           isMeasurementStarted = false;
           cancelAnimationFrame(timerId);
         }
