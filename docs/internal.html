@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>値のソート</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .fixed-buttons {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        /* 追加: 非表示クラス */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="fixed-buttons">
+    <button id="button1" onclick="buttonClicked(1)">ホーム</button>
+    <button id="button2" onclick="buttonClicked(2)">学習開始</button>
+    <button id="button3" onclick="buttonClicked(3)">ランキング</button>
+</div>
+<script>
+    function buttonClicked(buttonNumber) {
+        // 追加: 一旦すべてのコンテンツを非表示にする
+        document.getElementById('iframeContainer').classList.add('hidden');
+
+        if (buttonNumber === 3) {
+            // buttonNumberが3の場合に実行するコード
+            // 追加: 表示する要素に対してhiddenクラスを除去
+            document.getElementById('iframeContainer').classList.remove('hidden');
+            document.getElementById('iframeContainer').innerHTML = `
+                <iframe src="content_1.html" width="600" height="400"></iframe>`;
+        }
+    }
+</script>
+<div id="iframeContainer" class="hidden"></div>
+</body>
+</html>
