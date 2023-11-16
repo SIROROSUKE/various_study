@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>値のソート</title>
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="external-content"></div>
+    <div class="container">
+        <h1 class="mb-4">値のソート</h1>
+        <form class="text-center" onsubmit="event.preventDefault();">
+            <div class="form-group">
+                <label for="inputValues">値を入力:</label>
+                <input type="number" class="form-control" id="inputValues" onkeydown="if (event.key === 'Enter') addValue()">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addValue()">追加</button>
+        </form>
+        
+        <h2 class="mt-4">ソートされた値:</h2>
+        <p id="sortedValues"></p>
+    </div>
+<script src="external_1.js"></script>
+</body>
+</html>
