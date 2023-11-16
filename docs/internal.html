@@ -1,92 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Timer</title>
-  <style>
-    #timerDisplay {
-      font-size: 18px;
-      margin-top: 10px;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>いろいろ</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-    #myImage {
-      display: block;
-      margin: 0 auto;
-      cursor: pointer;
-    }
-  </style>
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .fixed-buttons {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        /* 追加: 非表示クラス */
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <img id="myImage" src="pic2.png" alt="Click me to start/stop the timer">
-  <div id="timerDisplay">Time elapsed: 0 minutes 0 seconds</div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var isMeasurementStarted = false;
-      var timerDisplay = document.getElementById("timerDisplay");
-      var myImage = document.getElementById("myImage");
-      var startTime;
-      var timerId; // 追加: タイマーIDを保存する変数
-
-      function waitImageClick() {
-        return new Promise(function(resolve) {
-          function handleClick() {
-            resolve();
-            myImage.removeEventListener("click", handleClick);
-          }
-          myImage.addEventListener("click", handleClick);
-        });
-      }
-
-      async function startMeasurement() {
-        while (true) {
-          await waitImageClick();
-          startTime = new Date();
-
-          myImage.src = "pic2.png";
-
-          await waitImageClick();
-          var endTime = new Date();
-
-          var elapsedTime = endTime - startTime;
-          displayElapsedTime(elapsedTime);
-
-          myImage.src = "pic.png";
+<div class="fixed-buttons">
+    <button id="button1" onclick="buttonClicked(1)">ホーム</button>
+    <button id="button2" onclick="buttonClicked(2)">学習開始</button>
+    <button id="button3" onclick="buttonClicked(3)">ランキング</button>
+</div>
+<script>
+    function buttonClicked(buttonNumber) {
+        // 追加: 一旦すべてのコンテンツを非表示にする
+        document.getElementById('iframeContainer').classList.add('hidden');
+        if (buttonNumber === 2) {
+            // buttonNumberが2の場合に実行するコード
+            // 追加: 表示する要素に対してhiddenクラスを除去
+            document.getElementById('iframeContainer').classList.remove('hidden');
+            document.getElementById('iframeContainer').innerHTML = `
+                <iframe src="content_2.html" width="600" height="400"></iframe>`;
         }
-      }
-
-      function displayElapsedTime(time) {
-        var seconds = Math.ceil(time / 1000);
-        var minutes = Math.floor(seconds / 60);
-        seconds %= 60;
-
-        timerDisplay.textContent = "Time elapsed: " + minutes + " minutes " + seconds + " seconds";
-      }
-
-      function updateElapsedTime() {
-        if (isMeasurementStarted) {
-          var currentTime = new Date();
-          var elapsedTime = currentTime - startTime;
-          displayElapsedTime(elapsedTime);
+        if (buttonNumber === 3) {
+            // buttonNumberが3の場合に実行するコード
+            // 追加: 表示する要素に対してhiddenクラスを除去
+            document.getElementById('iframeContainer').classList.remove('hidden');
+            document.getElementById('iframeContainer').innerHTML = `
+                <iframe src="content_1.html" width="600" height="400"></iframe>`;
         }
-
-        timerId = requestAnimationFrame(updateElapsedTime);
-      }
-
-      myImage.addEventListener("click", function() {
-        if (!isMeasurementStarted) {
-          isMeasurementStarted = true;
-          startMeasurement();
-          updateElapsedTime();
-        } else {
-          // タイマーを停止する
-          isMeasurementStarted = false;
-          cancelAnimationFrame(timerId);
-        }
-      });
-    });
-  </script>
+    }
+</script>
+<div id="iframeContainer" class="hidden"></div>
 </body>
 </html>
