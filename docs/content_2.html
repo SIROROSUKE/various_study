@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Timer</title>
+  <style>
+    #timerDisplay {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <img id="myImage" src="pic.png" alt="Click me to start the timer" style="cursor: pointer;">
+  <div id="timerDisplay"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var isMeasurementStarted = false;
+      var timerDisplay = document.getElementById("timerDisplay");
+      var myImage = document.getElementById("myImage");
+
+      function waitImageClick() {
+        return new Promise(function(resolve) {
+          function handleClick() {
+            resolve(); // 画像がクリックされたらPromiseを解決
+            myImage.removeEventListener("click", handleClick); // イベントリスナーを解除
+          }
+          myImage.addEventListener("click", handleClick);
+        });
+      }
+
+      async function startMeasurement() {
+        while (true) {
+          await waitImageClick(); // 画像がクリックされるまで待機
+          var startTime = new Date();
+
+          // 画像をpic2.pngに変更
+          myImage.src = "pic2.png";
+
+          await waitImageClick(); // 画像が再びクリックされるまで待機
+          var endTime = new Date();
+
+          var elapsedTime = endTime - startTime;
+          displayElapsedTime(elapsedTime);
+
+          // 画像を元に戻す（pic.png）
+          myImage.src = "pic.png";
+        }
+      }
+
+      function displayElapsedTime(time) {
+        timerDisplay.textContent = "Time elapsed: " + time + " milliseconds";
+      }
+
+      myImage.addEventListener("click", function() {
+        if (!isMeasurementStarted) {
+          isMeasurementStarted = true;
+          startMeasurement();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
