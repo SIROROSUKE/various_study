@@ -1,5 +1,12 @@
 var valuesArray = [];
 
+// ページ読み込み時にlocalStorageからデータを取得
+const storedData = JSON.parse(localStorage.getItem('sort'));
+if (storedData) {
+    valuesArray = storedData;
+    updateSortedValues();
+}
+
 function addValue() {
     var inputValue = document.getElementById('inputValues').value;
     if (inputValue !== '') {
@@ -7,7 +14,14 @@ function addValue() {
         valuesArray.sort(function(a, b) {
             return b - a;
         });
-        document.getElementById('sortedValues').textContent = valuesArray.join(', ');
+        updateSortedValues();
+        document.getElementById('inputValues').value = ''; // 入力欄をクリア
+
+        // 新しい値をlocalStorageに保存
+        localStorage.setItem('sort', JSON.stringify(valuesArray));
     }
-    document.getElementById('inputValues').value = ''; // 入力欄をクリア
+}
+
+function updateSortedValues() {
+    document.getElementById('sortedValues').textContent = valuesArray.join(', ');
 }
