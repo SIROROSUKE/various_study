@@ -47,6 +47,7 @@
     <button id="button1" onclick="buttonClicked(1)">ホーム</button>
     <button id="button2" onclick="buttonClicked(2)">学習開始</button>
     <button id="button3" onclick="buttonClicked(3)">ランキング</button>
+    <button id="button4" onclick="buttonClicked(4)">コメント</button>
 </div>
 <script>
     function buttonClicked(buttonNumber) {
@@ -65,6 +66,12 @@
             document.getElementById('iframeContainer').classList.remove('hidden');
             document.getElementById('iframeContainer').innerHTML = `
                 <iframe src="content_1.html" width="600" height="400"></iframe>`;
+        }if (buttonNumber === 4) {
+            // buttonNumberが4の場合に実行するコード
+            // 追加: 表示する要素に対してhiddenクラスを除去
+            document.getElementById('iframeContainer').classList.remove('hidden');
+            document.getElementById('iframeContainer').innerHTML = `
+                <iframe src="content_3.html" width="600" height="400"></iframe>`;
         }
     }
 </script>
