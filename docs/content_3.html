@@ -1,0 +1,39 @@
+<!-- content_3.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Timer</title>
+  <style>
+    #timerDisplay {
+      font-size: 18px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #myImage {
+      display: block;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <div id="external-content"></div>
+    <div class="container">
+        <h1 class="mb-4">コメント</h1>
+        <form class="text-center" onsubmit="event.preventDefault();">
+            <div class="form-group">
+                <label for="inputValues">コメントを入力:</label>
+                <input class="form-control" id="inputValues" onkeydown="if (event.key === 'Enter') addValue()">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addValue()">追加</button>
+        </form>
+        
+        <h2 class="mt-4">コメント：</h2>
+        <p id="sortedValues"></p>
+    </div>
+    <script src="external_3.js"></script>
+</body>
+</html>
